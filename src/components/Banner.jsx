@@ -1,6 +1,6 @@
-const Banner = ({app_title}) => 
+const Banner = ({AppTitle}) => 
     (<h1>
-        {app_title}
+        {AppTitle}
     </h1>);
 
 export default Banner;
