@@ -1,7 +1,10 @@
+import './CourseList.css';
+import Course from './Course.jsx';
+
 const CourseList = ({courses}) => (
-    <div>
+    <div className="courses-grid">
       { Object.entries(courses).map(([id,course]) => 
-      <div key={id}>{course.term} {course.number}: {course.title}</div> ) }
+      <div key={id}><Course course={course}/></div> ) }
     </div>
 );
 
