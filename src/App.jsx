@@ -3,9 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Banner from './components/Banner';
-import CourseList from './components/CourseList';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useJsonQuery } from './utilities/ClassQuery';
+import TermPage from './components/TermPage';
 
 const queryClient = new QueryClient();
 
@@ -16,9 +16,9 @@ const App = () => {
   if(error) return <p>Error: {error.message}</p>;
 
   return(
-      <div>
+      <div className='app-container'>
         <Banner AppTitle={schedule.title}/>
-        <CourseList courses={schedule.courses}/>
+        <TermPage courses={schedule.courses}/>
       </div>
   );
 };
