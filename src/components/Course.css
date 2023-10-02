@@ -1,3 +1,7 @@
 .card-desc {
     height: 80px;
 }
+
+.card-body.selected {
+    border: 2px solid red;
+}
