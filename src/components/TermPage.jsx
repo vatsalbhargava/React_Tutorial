@@ -16,7 +16,6 @@ const TermPage = ({courses}) => {
     
     const openModal = () => setOpen(true);
     const closeModal = () => setOpen(false);
-    console.log(selected);
     return(
         <div>
             <button className="btn btn-outline-dark" onClick={openModal}><i className="bi bi-cart4">Course Plan</i></button>

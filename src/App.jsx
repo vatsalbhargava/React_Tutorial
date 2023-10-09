@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useJsonQuery } from './utilities/ClassQuery';
 import TermPage from './components/TermPage';
 const queryClient = new QueryClient();
+import Dispatcher from './components/Dispatcher';
 
 
 const App = () => {
@@ -18,7 +19,7 @@ const App = () => {
   return(
       <div className='app-container'>
         <Banner AppTitle={schedule.title}/>
-        <TermPage courses={schedule.courses}/>
+        <Dispatcher courses={schedule.courses}/>
       </div>
   );
 };
