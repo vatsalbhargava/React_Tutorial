@@ -42,7 +42,7 @@ export const CourseEditor = ({course}) => {
 
   return (
     <form onSubmit={null} noValidate className={state.errors ? 'was-validated' : null}>
-      <InputField name="Title" text="Title" state={state} change={change} />
+      <InputField name="Title" text="New Course Title" state={state} change={change} />
       <InputField name="Meeting time" text="Meeting Time" state={state} change={change} />
       <ButtonBar />
     </form>

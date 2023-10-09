@@ -13,10 +13,8 @@ const Course = ({ course, selected, toggleSelected }) => {
           <div className="card-desc">
             <p className="card-text">{course.title}</p>
           </div>
-          <div className="edit-course-form">
-            {/* put the form in here!!! */}
-            
-            <Link to={`/courses/${course.term + course.number}/edit`}>edit</Link>
+          <div className="edit-course-form">            
+            <Link to={`/courses/${course.term + course.number}/edit`}>Edit Info</Link>
           </div>
           <hr></hr>
           <p className="card-times">{course.meets}</p>
