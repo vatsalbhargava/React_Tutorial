@@ -2,10 +2,10 @@ import { useFormData } from './utilities/useFormData';
 import { useNavigate } from 'react-router-dom';
 const validateCourseData = (key, val) => {
   switch (key) {
-    case 'firstName': case 'lastName':
-      return /(^\w\w)/.test(val) ? '' : 'must be least two characters';
-    case 'email':
-      return /^\w+@\w+[.]\w+/.test(val) ? '' : 'must contain name@domain.top-level-domain';
+    case 'Title':
+      return /(^\w\w)/.test(val) ? '' : 'must be least two characters';    case 'New Meeting Time':
+    case 'Meeting time':
+      return val == '' || /^[MTuWThF]+ ((0|1)[0-9]|2[1-3]):([0-5][0-9])-((0|1)[0-9]|2[1-3]):([0-5][0-9])/.test(val) ? '' : 'must contain days and start-end, e.g., TuTh 11:00-12:20';
     default: return '';
   }
 };
@@ -24,14 +24,13 @@ const ButtonBar = ({message, disabled}) => {
   return (
     <div className="d-flex">
       <button type="button" className="btn btn-outline-dark me-2" onClick={() => navigate(-1)}>Cancel</button>
-      {/* <button type="submit" className="btn btn-primary me-auto" disabled={disabled}>Submit</button> */}
-      {/* <span className="p-2">{message}</span> */}
+      <button type="submit" className="btn btn-primary me-auto" disabled={disabled}>Submit</button>
+      <span className="p-2">{message}</span>
     </div>
   );
 };
 
 export const CourseEditor = ({course}) => {
-  //const [update, result] = useDbUpdate(`/users/${user.id}`);
   const [state, change] = useFormData(validateCourseData, course);
   const submit = (evt) => {
     evt.preventDefault();
@@ -43,7 +42,7 @@ export const CourseEditor = ({course}) => {
   return (
     <form onSubmit={null} noValidate className={state.errors ? 'was-validated' : null}>
       <InputField name="Title" text="New Course Title" state={state} change={change} />
-      <InputField name="Meeting time" text="Meeting Time" state={state} change={change} />
+      <InputField name="Meeting time" text="New Meeting Time" state={state} change={change} />
       <ButtonBar />
     </form>
   )

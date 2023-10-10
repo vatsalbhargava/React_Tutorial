@@ -3,7 +3,6 @@ import { CourseEditor } from '../CourseEditor';
 import TermPage from './TermPage';
 const CourseFormForUrl = ({courses}) => {
   const { id } = useParams();
-  console.log("heyyyyy");
   return <CourseEditor id={id} course={courses[id]} />;
 };
 
