@@ -1,7 +1,6 @@
-# React Vitest Template
+Styling and CSS to be done after all functionality implemented.
 
-A starter template for building React apps with Vite. Includes Vitest for unit testing and
-a hefty .gitignore file.
+https://reacttutorial-vbe280.web.app/
 
 ## Usage
 
