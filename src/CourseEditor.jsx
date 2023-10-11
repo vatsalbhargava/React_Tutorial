@@ -1,12 +1,14 @@
+import { useDbUpdate } from './utilities/firebase';
 import { useFormData } from './utilities/useFormData';
 import { useNavigate } from 'react-router-dom';
+
 const validateCourseData = (key, val) => {
   switch (key) {
-    case 'Title':
-      return /(^\w\w)/.test(val) ? '' : 'must be least two characters';    case 'New Meeting Time':
-    case 'Meeting time':
-      return val == '' || /^[MTuWThF]+ ((0|1)[0-9]|2[1-3]):([0-5][0-9])-((0|1)[0-9]|2[1-3]):([0-5][0-9])/.test(val) ? '' : 'must contain days and start-end, e.g., TuTh 11:00-12:20';
-    default: return '';
+    case 'title':
+      return /(^\w\w)/.test(val) ? '' : 'must be least two characters';
+    case 'meets':
+      return val == '' || /^[MTuWThF]+ (([0-2]?[0-9]):([0-5][0-9])-([0-2]?[0-9]):([0-5][0-9]))/.test(val) ? '' : 'must contain days and start-end, e.g., TuTh 11:00-12:20';
+      default: return '';
   }
 };
 
@@ -30,20 +32,25 @@ const ButtonBar = ({message, disabled}) => {
   );
 };
 
-export const CourseEditor = ({course}) => {
+export const CourseEditor = ({id, course}) => {
   const [state, change] = useFormData(validateCourseData, course);
+  const key = id[0] + id.slice(-3);
+  const [ update, result ] = useDbUpdate(`/courses/${key}`);
+  const navigate = useNavigate();
+
   const submit = (evt) => {
     evt.preventDefault();
     if (!state.errors) {
       update(state.values);
     }
+    navigate('/');
   };
 
   return (
-    <form onSubmit={null} noValidate className={state.errors ? 'was-validated' : null}>
-      <InputField name="Title" text="New Course Title" state={state} change={change} />
-      <InputField name="Meeting time" text="New Meeting Time" state={state} change={change} />
-      <ButtonBar />
+    <form onSubmit={submit} noValidate className={state.errors ? 'was-validated' : null}>
+      <InputField name="title" text="New Course Title" state={state} change={change} />
+      <InputField name="meets" text="New Meeting Time" state={state} change={change} />
+      <ButtonBar ButtonBar message={result?.message}/>
     </form>
   )
 };

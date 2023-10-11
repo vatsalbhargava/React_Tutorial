@@ -3,7 +3,6 @@ import { isConflict } from '../utilities/Conflict';
 import { Link } from 'react-router-dom';
 
 const Course = ({ course, selected, toggleSelected }) => {
-  console.log(course.term[0] + course.number);
   return <div 
       className="card m-1 p-2" 
       onClick={isConflict(course, selected) ? null : () => toggleSelected(course)}
