@@ -1,8 +1,11 @@
 import './Course.css';
 import { isConflict } from '../utilities/Conflict';
 import { Link } from 'react-router-dom';
+import { useAuthState } from '../utilities/firebase';
 
 const Course = ({ course, selected, toggleSelected }) => {
+  const [user] = useAuthState();
+
   return <div 
       className="card m-1 p-2" 
       onClick={isConflict(course, selected) ? null : () => toggleSelected(course)}
@@ -13,7 +16,7 @@ const Course = ({ course, selected, toggleSelected }) => {
             <p className="card-text">{course.title}</p>
           </div>
           <div className="edit-course-form">            
-            <Link to={`/courses/${course.term + course.number}/edit`}>Edit Info</Link>
+            {user && <Link to={`/courses/${course.term + course.number}/edit`}>Edit Info</Link>}
           </div>
           <hr></hr>
           <p className="card-times">{course.meets}</p>
