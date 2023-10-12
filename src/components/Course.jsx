@@ -2,9 +2,11 @@ import './Course.css';
 import { isConflict } from '../utilities/Conflict';
 import { Link } from 'react-router-dom';
 import { useAuthState } from '../utilities/firebase';
+import { useProfile } from '../utilities/profile';
 
 const Course = ({ course, selected, toggleSelected }) => {
   const [user] = useAuthState();
+  const [profile, profileLoading, profileError] = useProfile();
 
   return <div 
       className="card m-1 p-2" 
@@ -16,7 +18,7 @@ const Course = ({ course, selected, toggleSelected }) => {
             <p className="card-text">{course.title}</p>
           </div>
           <div className="edit-course-form">            
-            {user && <Link to={`/courses/${course.term + course.number}/edit`}>Edit Info</Link>}
+            {profile?.isAdmin && <Link to={`/courses/${course.term + course.number}/edit`}>Edit Info</Link>}
           </div>
           <hr></hr>
           <p className="card-times">{course.meets}</p>
